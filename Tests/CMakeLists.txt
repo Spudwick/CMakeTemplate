@@ -1,4 +1,6 @@
 ﻿
+enable_testing()
+
 include("./macros.cmake")
 
 # Find Boost Library for Unit Test Framework.
