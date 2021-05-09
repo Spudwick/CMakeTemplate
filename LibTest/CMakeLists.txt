@@ -1,11 +1,11 @@
 ﻿# CMakeList.txt : CMake project for LibraryTest, include source and define
 # project specific logic here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required(VERSION 3.8)
 
 # Add source to this project's executable.
-add_library (LibTest "src/LibraryTest.cpp" "inc/LibraryTest.h"  "inc/api.h")
-target_include_directories(LibTest PUBLIC "./inc")
+add_library(LibTest "src/LibraryTest.cpp" "inc/LibraryTest.h"  "inc/api.h")
+target_include_directories(LibTest PUBLIC "inc/")
 
 target_compile_definitions(LibTest
 	PUBLIC $<$<CONFIG:Debug>:_LIB_DEBUG_>
@@ -17,9 +17,4 @@ if( NOT BUILD_SHARED_LIBS )
 endif()
 
 # Create install targets.
-install(TARGETS LibTest
-		CONFIGURATIONS Debug
-		DESTINATION "${PROJECT_BINARY_DIR}/_install")
-install(TARGETS LibTest
-		CONFIGURATIONS Release
-		DESTINATION "${PROJECT_BINARY_DIR}/_install")
+install(TARGETS LibTest)

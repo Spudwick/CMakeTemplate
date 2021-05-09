@@ -5,7 +5,6 @@
 
 #include "api.h"
 
-// TODO: Reference additional headers your program requires here.
 LIBTEST_API void libprint(void);
 
 LIBTEST_API int get1(void);

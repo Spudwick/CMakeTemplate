@@ -15,14 +15,15 @@ macro(add_unit_test)
 	# Add additional include directories.
 	target_include_directories(${UNIT_TEST_NAME} PRIVATE ${UNIT_TEST_INC_DIRS})
 
-	# Create CTest target.
-	add_test(NAME ${UNIT_TEST_NAME} COMMAND ${UNIT_TEST_NAME})
+	# Create test for CTest.
+	add_test(	NAME ${UNIT_TEST_NAME}
+				COMMAND ${UNIT_TEST_NAME})
 	# Add Test Name to the global list of Unit Tests.
 	set(UTEST_LIST ${UTEST_LIST} ${UNIT_TEST_NAME})
 	# Create a target to build and run test.
-	add_custom_target(run_${UNIT_TEST_NAME}
-                  COMMAND ${CMAKE_CTEST_COMMAND} -R ${UNIT_TEST_NAME}
-                  DEPENDS ${UNIT_TEST_NAME})
+	add_custom_target(	run_${UNIT_TEST_NAME}
+						COMMAND ${CMAKE_CTEST_COMMAND} -C $<CONFIG> -R ${UNIT_TEST_NAME}
+						DEPENDS ${UNIT_TEST_NAME})
 
 	message(DEBUG "   Generated target '${UNIT_TEST_NAME}'")
 	message(DEBUG "   Generated target 'run_${UNIT_TEST_NAME}'")
@@ -30,6 +31,8 @@ endmacro(add_unit_test)
 
 macro(create_test_target)
 	# Create additional target to build and run all unit tests, "run_tests".
-	add_custom_target(run_tests COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS ${UTEST_LIST})
+	add_custom_target(	run_tests
+						COMMAND ${CMAKE_CTEST_COMMAND} -C $<CONFIG>
+						DEPENDS ${UTEST_LIST})
 	message(DEBUG "Generated target 'run_tests'")
 endmacro(create_test_target)
