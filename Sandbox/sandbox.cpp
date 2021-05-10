@@ -2,10 +2,9 @@
 //
 
 
-#include <conio.h>
 #include <iostream>
 
-#include <LibraryTest.h>
+#include <LibTest/LibraryTest.h>
 
 
 int main()
@@ -18,7 +17,5 @@ int main()
 	std::cout << "Main debug build!!\n";
 #endif
 
-	std::cout << "\nPress any key to continue...\n";
-	_getch();
 	return 0;
 }

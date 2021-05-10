@@ -3,10 +3,10 @@
 
 #include <iostream>
 
-#include "LibraryTest.h"
+#include "LibTest/LibraryTest.h"
 
 void libprint() {
-	std::cout << "Hello from DLL!!\n";
+	std::cout << "Hello from Library!!\n";
 
 #ifdef _LIB_DEBUG_
 	std::cout << "Debug build!!\n";

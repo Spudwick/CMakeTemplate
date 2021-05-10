@@ -27,8 +27,6 @@ option(BUILD_SHARED_LIBS "Build shared library (ON:.dll/.so  OFF:.lib/.a)" ON)
 
 project("LibraryTest" LANGUAGES C CXX)
 
-message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
-
 # Include sub-projects.
 add_subdirectory("LibTest")
 add_subdirectory("Sandbox")

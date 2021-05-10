@@ -2,7 +2,7 @@
 #define BOOST_TEST_MODULE LibTests
 #include <boost/test/unit_test.hpp>
 
-#include "LibraryTest.h"
+#include "LibTest/LibraryTest.h"
 
 BOOST_AUTO_TEST_CASE(PassTest)
 {
