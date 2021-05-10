@@ -4,9 +4,12 @@
 #include <iostream>
 
 #include "LibTest/LibraryTest.h"
+#include "LibTest/config.h"
 
 void libprint() {
 	std::cout << "Hello from Library!!\n";
+
+	std::cout << "This is version " << VER_STRING << "\n";
 
 #ifdef _LIB_DEBUG_
 	std::cout << "Debug build!!\n";

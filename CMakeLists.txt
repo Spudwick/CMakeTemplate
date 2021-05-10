@@ -25,7 +25,9 @@ message(DEBUG "Toolchain File : '${CMAKE_TOOLCHAIN_FILE}'")
 option(BUILD_SHARED_LIBS "Build shared library (ON:.dll/.so  OFF:.lib/.a)" ON)
 
 
-project("LibraryTest" LANGUAGES C CXX)
+project(	"LibraryTest"
+			VERSION 1.2.3.4
+			LANGUAGES C CXX)
 
 # Include sub-projects.
 add_subdirectory("LibTest")
