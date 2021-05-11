@@ -3,13 +3,15 @@
 
 #include <iostream>
 
-#include "LibTest/LibraryTest.h"
 #include "LibTest/config.h"
+#include "LibTest/LibraryTest.h"
+
+namespace ROOT_NAMESPACE {
 
 void libprint() {
 	std::cout << "Hello from Library!!\n";
 
-	std::cout << "This is version " << VER_STRING << "\n";
+	std::cout << "This is version " << VERSION_STRING << "\n";
 
 #ifdef _LIB_DEBUG_
 	std::cout << "Debug build!!\n";
@@ -22,4 +24,6 @@ int get1() {
 
 int get2() {
 	return 2;
+}
+
 }

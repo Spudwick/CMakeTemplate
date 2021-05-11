@@ -4,7 +4,11 @@
 cmake_minimum_required(VERSION 3.8)
 
 # Add source to this project's executable.
-add_library(LibTest "src/LibraryTest.cpp" "inc/LibTest/LibraryTest.h" "inc/LibTest/api.h")
+if( LIBTEST_BUILD_SHARED )
+	add_library(LibTest SHARED "src/LibraryTest.cpp" "inc/LibTest/LibraryTest.h")
+else()
+	add_library(LibTest STATIC "src/LibraryTest.cpp" "inc/LibTest/LibraryTest.h")
+endif()
 target_include_directories(	LibTest PUBLIC
     						$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>
 							$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated/inc>
@@ -13,14 +17,14 @@ target_include_directories(	LibTest PUBLIC
 target_compile_definitions(	LibTest
 							PUBLIC $<$<CONFIG:Debug>:_LIB_DEBUG_>)
 
-# If library is built statically or we are on Linux, define API no exports.
-if( UNIX OR NOT BUILD_SHARED_LIBS )
-	target_compile_definitions(LibTest PUBLIC LibTest_NO_EXPORTS)
-endif()
-
 # Generate the configuration header file.
 configure_file(	${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
 				"${CMAKE_CURRENT_BINARY_DIR}/generated/inc/LibTest/config.h")
+
+# Generate the export api header.
+include(GenerateExportHeader)
+generate_export_header(	LibTest
+						EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/generated/inc/LibTest/exports.h")
 
 # Generate the Config and Version information cmake files to install alongside library.
 include(CMakePackageConfigHelpers)

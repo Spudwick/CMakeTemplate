@@ -9,9 +9,9 @@
 
 int main()
 {
-	libprint();
+	test::libprint();
 
-	std::cout << "Functions return : " << get1() << " & " << get2() << "\n";
+	std::cout << "Functions return : " << test::get1() << " & " << test::get2() << "\n";
 
 #ifdef _LIB_DEBUG_
 	std::cout << "Main debug build!!\n";

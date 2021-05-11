@@ -10,7 +10,7 @@ set(CMAKE_MESSAGE_LOG_LEVEL "DEBUG")
 # Default Toolchain File can be overwritten by passing -DCMAKE_TOOLCHAIN_FILE='<toolchain_file>' on command line.
 if( NOT DEFINED CMAKE_TOOLCHAIN_FILE )
 	if( WIN32 )
-		message(DEBUG "Using default windows Toolchain File (vcpkg.cmake)")
+		message(INFO "Using default windows Toolchain File (vcpkg.cmake)")
 		# If building on windows we use VCPKG by default (root dir of VCPKG install must be provided by environment variable VCPKG_ROOT).
 		if( DEFINED ENV{VCPKG_ROOT} )
 			set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
@@ -22,11 +22,23 @@ endif()
 message(DEBUG "Toolchain File : '${CMAKE_TOOLCHAIN_FILE}'")
 
 # Create option to select if library should be built as shared or static.
-option(BUILD_SHARED_LIBS "Build shared library (ON:.dll/.so  OFF:.lib/.a)" ON)
+option(LIBTEST_BUILD_SHARED "Build shared library (ON:.dll/.so  OFF:.lib/.a)" ON)
 
+# Set the default build type. This can be overwritten using cmake command line and is ignored for multi-config generators.
+if( NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES )
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build to perform." FORCE)
+	set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release")
+endif()
+
+set(LIBTEST_NAMESPACE "test" CACHE STRING "Root namespace for LibTest.")
+
+# Read verion numbers in from source code.
+include(VerFromHdr.cmake)
+get_version_from_header(	FILE "${CMAKE_SOURCE_DIR}/LibTest/config.h.in"
+							PREFIX LIB)
 
 project(	"LibraryTest"
-			VERSION 1.2.3.4
+			VERSION ${LIB_VER_MAJOR}.${LIB_VER_MINOR}.${LIB_VER_PATCH}.${LIB_VER_TWEAK}
 			LANGUAGES C CXX)
 
 # Include sub-projects.

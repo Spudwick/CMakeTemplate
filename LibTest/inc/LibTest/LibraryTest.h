@@ -3,9 +3,14 @@
 
 #pragma once
 
-#include "api.h"
+#include "LibTest/config.h"
+#include "LibTest/exports.h"
 
-LIBTEST_API void libprint(void);
+namespace ROOT_NAMESPACE {
 
-LIBTEST_API int get1(void);
-LIBTEST_API int get2(void);
+LIBTEST_EXPORT void libprint(void);
+
+LIBTEST_EXPORT int get1(void);
+LIBTEST_EXPORT int get2(void);
+
+}
